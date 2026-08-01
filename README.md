@@ -20,6 +20,7 @@
 | Payments | ЮKassa / Robokassa |
 | AI | подключение ИИ (`AI_PROVIDER`) |
 | Email | SMTP или Unisender |
+| Validation | Zod **4.4** |
 | Package manager | pnpm **10** |
 
 ---
@@ -30,9 +31,10 @@
 git clone https://github.com/nacosof/NimbleFlow.git
 cd NimbleFlow
 pnpm install
+cp .env.example .env
 pnpm dev
 ```
 
 Открой http://localhost:3000
 
-Сейчас доступны лендинг (`/`) и профиль (`/profile`). Auth, БД и оплата — дальше по разработке.
+Сейчас: лендинг (`/`), профиль (`/profile`), конфиг окружения (`.env.example`). Auth, БД и оплата — дальше по разработке.

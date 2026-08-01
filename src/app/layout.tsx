@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
+import { site } from "@/config/site";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NimbleFlow",
-  description:
-    "Готовый каркас сайта на Next.js с авторизацией, личным кабинетом и приёмом оплаты.",
+  title: site.title,
+  description: site.description,
+  metadataBase: new URL(site.url),
 };
 
 export default function RootLayout({
