@@ -6,5 +6,5 @@ export type {
   ChatRole,
 } from "./types";
 export { chatCompletion } from "./chat";
-export { getAiProviderConfig, listAiProviders } from "./providers";
+export { getAiProviderConfig } from "./providers";
 export { getAiStatus, type AiStatus } from "./status";

@@ -69,7 +69,3 @@ const providers: Record<AiProviderId, AiProviderConfig> = {
 export function getAiProviderConfig(id: AiProviderId): AiProviderConfig {
   return providers[id];
 }
-
-export function listAiProviders(): AiProviderConfig[] {
-  return Object.values(providers);
-}

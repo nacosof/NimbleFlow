@@ -2,23 +2,21 @@
 
 # NimbleFlow
 
-*в разработке*
-
 </div>
 
 # Сэкономьте часы на написании повторяющегося кода, выпускайте продукты быстро и получайте прибыль!
 
-Готовый каркас сайта на Next.js: лендинг, вход, кабинет, оплату и AI.
+Готовый каркас сайта на Next.js: лендинг, вход, кабинет, оплата, документы и AI.
 
 Клонируешь репозиторий, заполняешь ключи — получаешь связанный проект. Это не облачный сервис и не набор кнопок. Это **исходный код твоего проекта**, который можно менять и деплоить куда угодно.
 
 <div align="center">
 
-### NimbleFlow + AI =
+---
 
 <img src="public/readme/ai-equation.png" alt="NimbleFlow плюс Cursor, Claude, ChatGPT, Gemini, Grok, DeepSeek равно Запусти свой проект мгновенно" width="720" />
 
-Отдай этот репозиторий в **Cursor / Claude / ChatGPT / Gemini / Grok / DeepSeek**, опиши свой продукт — и допиливай каркас под себя, а не собирай auth, оплату и кабинет с нуля.
+Отдай этот репозиторий **ИИ**, опиши свой продукт — и допиливай каркас под себя или выдергивай то, что надо тебе, а не собирай auth, оплату, кабинет, интеграцию AI и документы с нуля!
 
 <br />
 
@@ -59,7 +57,7 @@ src/
 │   ├── (marketing)/     # /, /login, /pricing, /legal/*, /payments/*
 │   ├── (app)/           # /profile — кабинет
 │   └── api/
-│       ├── auth/        # Auth.js + VK callback
+│       ├── auth/        # [...nextauth] = Яндекс; VK ID
 │       ├── payments/    # создание платежа
 │       ├── ai/chat/     # чат с нейросетью
 │       └── webhooks/    # yookassa, robokassa
@@ -71,7 +69,7 @@ src/
 ├── config/              # site, plans, env, legal
 ├── db/                  # Drizzle schema + runtime
 └── lib/
-    ├── auth/            # сессия, OAuth, verification
+    ├── auth/            # config.ts = Яндекс; vk-id/ = VK; verification/ = OTP
     ├── payments/        # checkout, finalize
     ├── yookassa/ · robokassa/
     ├── subscription/    # Free / Pro
@@ -80,7 +78,8 @@ src/
     └── seo/
 ```
 
-Конфиг и секреты — через `.env` (см. [`.env.example`](.env.example)). Подробности модулей — в [`docs/`](docs/README.md).
+Подробности модулей — в [`docs/`](docs/README.md).
+Конфиг и секреты — через `.env` (см. [`.env.example`](.env.example)). 
 
 ---
 
@@ -152,3 +151,18 @@ pnpm dev
 | `/profile` | Кабинет |
 | `/legal/terms` · `/legal/offer` · `/legal/privacy` | Юр. шаблоны |
 | `/payments/success` · `/payments/fail` | Возврат после оплаты |
+
+---
+
+## Definition of Done
+
+Проверь путь продукта после настройки `.env`:
+
+1. `pnpm install` → `pnpm db:push` → `pnpm dev`
+2. `/login` — вход через Яндекс или VK ID
+3. `/profile` — кабинет, OTP email/телефона
+4. `/pricing` или кабинет — тестовая оплата Pro (ЮKassa или Robokassa + webhook; локально см. [`docs/setup-webhooks-ngrok.md`](docs/setup-webhooks-ngrok.md))
+5. В профиле план = **pro**
+6. Письмо welcome / payment-succeeded уходит через SMTP|Unisender или пишется в лог (если почта не настроена)
+
+Dev Login закрывает только UI без БД — оплата и OTP в нём не работают.

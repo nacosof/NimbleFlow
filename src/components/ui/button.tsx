@@ -78,30 +78,3 @@ export function ButtonLink({
     </Link>
   );
 }
-
-type ButtonExternalProps = {
-  href: string;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  className?: string;
-  children: React.ReactNode;
-};
-
-export function ButtonExternal({
-  href,
-  variant = "primary",
-  size = "md",
-  className,
-  children,
-}: ButtonExternalProps) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={buttonClassName({ variant, size, className })}
-    >
-      {children}
-    </a>
-  );
-}

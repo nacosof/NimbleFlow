@@ -72,6 +72,18 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <code className="text-foreground">AUTH_DEV_LOGIN=true</code>.
         </p>
       ) : null}
+
+      <nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
+        <Link href="/legal/terms" className="transition hover:text-foreground">
+          Соглашение
+        </Link>
+        <Link href="/legal/offer" className="transition hover:text-foreground">
+          Оферта
+        </Link>
+        <Link href="/legal/privacy" className="transition hover:text-foreground">
+          Конфиденциальность
+        </Link>
+      </nav>
     </Container>
   );
 }

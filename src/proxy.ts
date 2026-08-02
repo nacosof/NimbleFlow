@@ -8,7 +8,7 @@ function hasSessionCookie(request: NextRequest) {
   );
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const isLoggedIn = hasSessionCookie(request);
   const { pathname } = request.nextUrl;
 

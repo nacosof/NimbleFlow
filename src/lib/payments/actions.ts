@@ -14,6 +14,8 @@ export async function startProCheckoutAction(
   _prev: CheckoutActionState,
   _formData: FormData,
 ): Promise<CheckoutActionState> {
+  void _prev;
+  void _formData;
   const user = await requireUser();
 
   if (isDevUserId(user.id)) {
