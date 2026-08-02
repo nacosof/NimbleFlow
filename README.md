@@ -1,8 +1,8 @@
 # NimbleFlow | В разработке
 
-**Готовый каркас сайта на Next.js с авторизацией, личным кабинетом и приёмом оплаты.**
+**Готовый каркас сайта на Next.js**
 
-Клонируешь репозиторий, заполняешь ключи — получаешь связанный проект: лендинг, вход, кабинет и оплату.
+Клонируешь репозиторий, заполняешь ключи — получаешь связанный проект: лендинг, вход, кабинет, оплату и AI.
 
 Это не облачный сервис и не набор кнопок. Это **исходный код твоего проекта**, который можно менять и деплоить куда угодно.
 
@@ -15,8 +15,8 @@
 | Framework | Next.js **16.2**, React **19.2** |
 | Language | TypeScript **5.9** |
 | UI | Tailwind CSS **4.3** |
-| Auth | Auth.js **v5** — Яндекс ID, VK ID, Mail.ru |
-| Database | Drizzle ORM — PostgreSQL или MySQL (`DB_PROVIDER`) |
+| Auth | Auth.js **v5** — Яндекс, VK, Mail.ru, телефон |
+| Database | Drizzle ORM **0.45** — PostgreSQL или MySQL (`DB_PROVIDER`) |
 | Payments | ЮKassa / Robokassa |
 | AI | подключение ИИ (`AI_PROVIDER`) |
 | Email | SMTP или Unisender |
@@ -32,9 +32,15 @@ git clone https://github.com/nacosof/NimbleFlow.git
 cd NimbleFlow
 pnpm install
 cp .env.example .env
+```
+
+В `.env` укажи `DATABASE_URL` и при необходимости `DB_PROVIDER=postgres|mysql`.
+
+```bash
+pnpm db:push
 pnpm dev
 ```
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), профиль (`/profile`), конфиг окружения (`.env.example`). Auth, БД и оплата — дальше по разработке.
+Сейчас: лендинг (`/`), профиль (`/profile`), env-конфиг, схема БД (Drizzle). Auth и оплата — дальше.
