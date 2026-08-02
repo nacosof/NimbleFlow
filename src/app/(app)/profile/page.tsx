@@ -1,15 +1,33 @@
 import Link from "next/link";
 
 import { ContactVerifyCard } from "@/components/profile/contact-verify-card";
+import { PayProButton } from "@/components/profile/pay-pro-button";
 import { requireUser } from "@/lib/auth";
 import { signOutAction } from "@/lib/auth/actions";
+import { isDevUserId } from "@/lib/auth/dev-login";
 import { getProfileContact } from "@/lib/auth/verification/service";
+import {
+  getEffectivePlan,
+  getUserSubscription,
+  hasProAccess,
+} from "@/lib/subscription";
 
 export const dynamic = "force-dynamic";
 
 export default async function ProfilePage() {
   const sessionUser = await requireUser();
   const contact = await getProfileContact(sessionUser.id);
+  const subscription = isDevUserId(sessionUser.id)
+    ? {
+        plan: sessionUser.plan ?? "free",
+        planExpiresAt: null as Date | null,
+      }
+    : ((await getUserSubscription(sessionUser.id)) ?? {
+        plan: contact?.plan ?? sessionUser.plan ?? "free",
+        planExpiresAt: null,
+      });
+  const effectivePlan = getEffectivePlan(subscription);
+  const hasPro = hasProAccess(subscription);
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-16">
@@ -33,9 +51,11 @@ export default async function ProfilePage() {
       <dl className="grid gap-4 text-sm">
         <div className="flex flex-col gap-1">
           <dt className="text-muted">План</dt>
-          <dd className="uppercase">{contact?.plan ?? sessionUser.plan}</dd>
+          <dd className="uppercase">{effectivePlan}</dd>
         </div>
       </dl>
+
+      <PayProButton hasPro={hasPro} />
 
       <ContactVerifyCard
         channel="email"
@@ -54,10 +74,6 @@ export default async function ProfilePage() {
         verified={Boolean(contact?.phoneVerifiedAt)}
         verifiedLabel="Подтверждён"
       />
-
-      <p className="border-t border-border pt-6 text-sm text-muted">
-        Оплата тарифа появится здесь на следующем шаге.
-      </p>
 
       <Link href="/" className="text-sm text-accent">
         На главную
