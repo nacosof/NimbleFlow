@@ -33,7 +33,7 @@
 | Framework | Next.js **16.2**, React **19.2** |
 | Language | TypeScript **5.9** |
 | UI | Tailwind CSS **4.3** |
-| Auth | Auth.js **v5** — Яндекс, VK, Mail.ru, телефон |
+| Auth | Auth.js **v5** — Яндекс, VK ID|
 | Database | Drizzle ORM **0.45** — PostgreSQL или MySQL (`DB_PROVIDER`) |
 | Payments | ЮKassa / Robokassa |
 | AI | подключение ИИ (`AI_PROVIDER`) |
@@ -43,7 +43,7 @@
 
 ---
 
-## Быстрый старт (каркас)
+## Быстрый старт 
 
 ```bash
 git clone https://github.com/nacosof/NimbleFlow.git
@@ -52,7 +52,9 @@ pnpm install
 cp .env.example .env
 ```
 
-В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*` / `AUTH_MAILRU_*`).
+В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*`).
+
+Без OAuth и БД можно просто посмотреть кабинет: в `.env` поставь `AUTH_DEV_LOGIN=true`, запусти `pnpm dev`, открой `/login` и нажми **«Войти как Dev (локально)»**. Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production — сессия без базы, для UI. Подтверждение email/телефона и оплата в этом режиме не работают.
 
 ```bash
 pnpm db:push
@@ -61,4 +63,4 @@ pnpm dev
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), вход (`/login`), профиль (`/profile`, нужен логин), схема БД. Оплата и форма телефон/email — дальше.
+Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона (`/profile`). Оплата — дальше.

@@ -12,3 +12,9 @@ declare module "next-auth" {
     plan?: string | null;
   }
 }
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    plan?: string;
+  }
+}

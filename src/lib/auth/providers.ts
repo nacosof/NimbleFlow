@@ -1,7 +1,7 @@
 import { getEnv } from "@/config/env";
 
 export type OAuthProviderOption = {
-  id: "yandex" | "vk" | "mailru";
+  id: "yandex" | "vk";
   name: string;
 };
 
@@ -14,11 +14,7 @@ export function getEnabledOAuthProviders(): OAuthProviderOption[] {
   }
 
   if (env.AUTH_VK_ID && env.AUTH_VK_SECRET) {
-    providers.push({ id: "vk", name: "VK" });
-  }
-
-  if (env.AUTH_MAILRU_ID && env.AUTH_MAILRU_SECRET) {
-    providers.push({ id: "mailru", name: "Mail.ru" });
+    providers.push({ id: "vk", name: "VK ID" });
   }
 
   return providers;

@@ -18,7 +18,6 @@ export const users = pgTable("user", {
   image: text("image"),
   yandexId: text("yandexId").unique(),
   vkId: text("vkId").unique(),
-  mailruId: text("mailruId").unique(),
   passwordHash: text("passwordHash"),
   phone: text("phone").unique(),
   phoneVerifiedAt: timestamp("phoneVerifiedAt", { mode: "date" }),
@@ -98,6 +97,21 @@ export const payments = pgTable("payment", {
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
+});
+
+export const verificationChallenges = pgTable("verificationChallenge", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  identifier: text("identifier").notNull(),
+  channel: text("channel").notNull(),
+  codeHash: text("codeHash").notNull(),
+  expiresAt: timestamp("expiresAt", { mode: "date" }).notNull(),
+  attempts: integer("attempts").notNull().default(0),
+  createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

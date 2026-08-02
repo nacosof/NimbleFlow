@@ -22,7 +22,7 @@ export default function MarketingHomePage() {
           href="/profile"
           className="rounded-lg border border-border px-5 py-3 text-sm transition hover:bg-white/70"
         >
-          Профиль
+          Кабинет
         </a>
       </div>
     </main>

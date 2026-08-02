@@ -1,12 +1,15 @@
 import Link from "next/link";
 
+import { ContactVerifyCard } from "@/components/profile/contact-verify-card";
 import { requireUser } from "@/lib/auth";
 import { signOutAction } from "@/lib/auth/actions";
+import { getProfileContact } from "@/lib/auth/verification/service";
 
 export const dynamic = "force-dynamic";
 
 export default async function ProfilePage() {
-  const user = await requireUser();
+  const sessionUser = await requireUser();
+  const contact = await getProfileContact(sessionUser.id);
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-16">
@@ -14,7 +17,7 @@ export default async function ProfilePage() {
         <div className="flex flex-col gap-2">
           <h1 className="font-display text-3xl tracking-tight">Профиль</h1>
           <p className="text-muted">
-            {user.name || user.email || "Пользователь"}
+            {contact?.name || contact?.email || "Пользователь"}
           </p>
         </div>
         <form action={signOutAction}>
@@ -27,16 +30,34 @@ export default async function ProfilePage() {
         </form>
       </div>
 
-      <dl className="grid gap-4 border-t border-border pt-6 text-sm">
-        <div className="flex flex-col gap-1">
-          <dt className="text-muted">Email</dt>
-          <dd>{user.email || "—"}</dd>
-        </div>
+      <dl className="grid gap-4 text-sm">
         <div className="flex flex-col gap-1">
           <dt className="text-muted">План</dt>
-          <dd className="uppercase">{user.plan}</dd>
+          <dd className="uppercase">{contact?.plan ?? sessionUser.plan}</dd>
         </div>
       </dl>
+
+      <ContactVerifyCard
+        channel="email"
+        label="Email"
+        placeholder="you@example.ru"
+        defaultValue={contact?.email ?? ""}
+        verified={Boolean(contact?.emailVerified)}
+        verifiedLabel="Подтверждён"
+      />
+
+      <ContactVerifyCard
+        channel="phone"
+        label="Телефон"
+        placeholder="+79001234567"
+        defaultValue={contact?.phone ?? ""}
+        verified={Boolean(contact?.phoneVerifiedAt)}
+        verifiedLabel="Подтверждён"
+      />
+
+      <p className="border-t border-border pt-6 text-sm text-muted">
+        Оплата тарифа появится здесь на следующем шаге.
+      </p>
 
       <Link href="/" className="text-sm text-accent">
         На главную

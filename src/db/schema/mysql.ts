@@ -18,7 +18,6 @@ export const users = mysqlTable("user", {
   image: varchar("image", { length: 2048 }),
   yandexId: varchar("yandexId", { length: 255 }).unique(),
   vkId: varchar("vkId", { length: 255 }).unique(),
-  mailruId: varchar("mailruId", { length: 255 }).unique(),
   passwordHash: varchar("passwordHash", { length: 255 }),
   phone: varchar("phone", { length: 32 }).unique(),
   phoneVerifiedAt: timestamp("phoneVerifiedAt", { mode: "date", fsp: 3 }),
@@ -102,6 +101,23 @@ export const payments = mysqlTable("payment", {
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
+});
+
+export const verificationChallenges = mysqlTable("verificationChallenge", {
+  id: varchar("id", { length: 255 })
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("userId", { length: 255 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  identifier: varchar("identifier", { length: 255 }).notNull(),
+  channel: varchar("channel", { length: 16 }).notNull(),
+  codeHash: varchar("codeHash", { length: 255 }).notNull(),
+  expiresAt: timestamp("expiresAt", { mode: "date", fsp: 3 }).notNull(),
+  attempts: int("attempts").notNull().default(0),
+  createdAt: timestamp("createdAt", { mode: "date", fsp: 3 })
+    .notNull()
+    .defaultNow(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

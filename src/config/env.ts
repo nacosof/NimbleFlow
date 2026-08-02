@@ -22,8 +22,9 @@ const envSchema = z.object({
   AUTH_YANDEX_SECRET: optionalString,
   AUTH_VK_ID: optionalString,
   AUTH_VK_SECRET: optionalString,
-  AUTH_MAILRU_ID: optionalString,
-  AUTH_MAILRU_SECRET: optionalString,
+  AUTH_DEV_LOGIN: z
+    .preprocess(emptyToUndefined, z.enum(["true", "false"]).optional())
+    .transform((value) => value === "true"),
   SMS_PROVIDER: z.enum(["smsru", "console"]).default("console"),
   SMSRU_API_ID: optionalString,
   SMSRU_FROM: optionalString,
