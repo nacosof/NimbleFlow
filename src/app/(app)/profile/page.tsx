@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
+import { AccountSummary, PlanStatus } from "@/components/app";
 import { AiChatCard } from "@/components/profile/ai-chat-card";
 import { ContactVerifyCard } from "@/components/profile/contact-verify-card";
-import { PayProButton } from "@/components/profile/pay-pro-button";
 import { Button, Container, SectionHeader } from "@/components/ui";
 import { getAiStatus } from "@/lib/ai";
 import { requireUser } from "@/lib/auth";
@@ -15,12 +16,25 @@ import {
   hasProAccess,
 } from "@/lib/subscription";
 
+export const metadata: Metadata = {
+  title: "Кабинет",
+  description: "Профиль, подписка, подтверждение контактов и AI-чат.",
+};
+
 export const dynamic = "force-dynamic";
 
-export default async function ProfilePage() {
+type ProfilePageProps = {
+  searchParams: Promise<{
+    paid?: string;
+  }>;
+};
+
+export default async function ProfilePage({ searchParams }: ProfilePageProps) {
+  const params = await searchParams;
   const sessionUser = await requireUser();
+  const isDevSession = isDevUserId(sessionUser.id);
   const contact = await getProfileContact(sessionUser.id);
-  const subscription = isDevUserId(sessionUser.id)
+  const subscription = isDevSession
     ? {
         plan: sessionUser.plan ?? "free",
         planExpiresAt: null as Date | null,
@@ -32,12 +46,13 @@ export default async function ProfilePage() {
   const effectivePlan = getEffectivePlan(subscription);
   const hasPro = hasProAccess(subscription);
   const aiStatus = getAiStatus();
+  const showPaidHint = params.paid === "1" && !hasPro;
 
   return (
     <Container className="gap-6 py-16">
       <SectionHeader
-        title="Профиль"
-        description={contact?.name || contact?.email || "Пользователь"}
+        title="Кабинет"
+        description={contact?.name || contact?.email || "Профиль"}
         action={
           <form action={signOutAction}>
             <Button type="submit" variant="secondary" size="sm">
@@ -47,14 +62,37 @@ export default async function ProfilePage() {
         }
       />
 
-      <dl className="grid gap-4 text-sm">
-        <div className="flex flex-col gap-1">
-          <dt className="text-muted">План</dt>
-          <dd className="uppercase">{effectivePlan}</dd>
-        </div>
-      </dl>
+      {hasPro ? (
+        <p className="rounded-lg border border-accent/20 bg-surface px-4 py-3 text-sm text-accent">
+          Подписка Pro активна
+          {subscription.planExpiresAt
+            ? ` до ${subscription.planExpiresAt.toLocaleDateString("ru-RU")}`
+            : ""}
+          .
+        </p>
+      ) : null}
 
-      <PayProButton hasPro={hasPro} />
+      {showPaidHint ? (
+        <p className="rounded-lg border border-border px-4 py-3 text-sm text-muted">
+          Платёж принят на стороне провайдера. Статус Pro появится после
+          webhook — обновите страницу через несколько секунд.
+        </p>
+      ) : null}
+
+      <AccountSummary
+        name={contact?.name ?? sessionUser.name ?? null}
+        email={contact?.email ?? sessionUser.email ?? null}
+        phone={contact?.phone ?? null}
+        emailVerified={Boolean(contact?.emailVerified)}
+        phoneVerified={Boolean(contact?.phoneVerifiedAt)}
+      />
+
+      <PlanStatus
+        plan={effectivePlan}
+        hasPro={hasPro}
+        expiresAt={subscription.planExpiresAt ?? null}
+        isDevSession={isDevSession}
+      />
 
       <AiChatCard status={aiStatus} />
 
@@ -76,9 +114,14 @@ export default async function ProfilePage() {
         verifiedLabel="Подтверждён"
       />
 
-      <Link href="/" className="text-sm text-accent">
-        На главную
-      </Link>
+      <div className="flex flex-wrap gap-4 text-sm">
+        <Link href="/" className="text-accent">
+          На главную
+        </Link>
+        <Link href="/pricing" className="text-accent">
+          Тарифы
+        </Link>
+      </div>
     </Container>
   );
 }

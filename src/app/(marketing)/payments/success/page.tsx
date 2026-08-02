@@ -19,7 +19,7 @@ export default function PaymentSuccessPage() {
         description="Вы вернулись с платёжной страницы. Статус Pro обновится после webhook — обычно за несколько секунд."
       />
       <div className="flex flex-wrap gap-3">
-        <ButtonLink href="/profile">Открыть кабинет</ButtonLink>
+        <ButtonLink href="/profile?paid=1">Открыть кабинет</ButtonLink>
         <ButtonLink href="/pricing" variant="secondary">
           К тарифам
         </ButtonLink>

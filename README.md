@@ -55,7 +55,7 @@ cp .env.example .env
 
 В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*`).
 
-Для чата с нейросетью в кабинете: `AI_PROVIDER` (например `mistral` или `openrouter`), `AI_API_KEY`, опционально `AI_MODEL`. Подробнее — [`docs/setup-ai.md`](docs/setup-ai.md).
+Для работы с нейросетью в кабинете укажи: `AI_PROVIDER`, `AI_API_KEY`, опционально `AI_MODEL`. Подробнее — [`docs/setup-ai.md`](docs/setup-ai.md).
 
 Без OAuth и БД можно просто посмотреть кабинет: в `.env` поставь `AUTH_DEV_LOGIN=true`, запусти `pnpm dev`, открой `/login` и нажми **«Войти как Dev (локально)»**. Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production — сессия без базы, для UI. Подтверждение email/телефона и оплата в этом режиме не работают. Чат с AI работает, если задан `AI_API_KEY`.
 
