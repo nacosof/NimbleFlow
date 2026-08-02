@@ -27,6 +27,18 @@ export function SiteFooter() {
           <Link href="/profile" className="transition hover:text-foreground">
             Кабинет
           </Link>
+          <Link href="/legal/terms" className="transition hover:text-foreground">
+            Соглашение
+          </Link>
+          <Link href="/legal/offer" className="transition hover:text-foreground">
+            Оферта
+          </Link>
+          <Link
+            href="/legal/privacy"
+            className="transition hover:text-foreground"
+          >
+            Конфиденциальность
+          </Link>
         </nav>
       </MarketingShell>
     </footer>
