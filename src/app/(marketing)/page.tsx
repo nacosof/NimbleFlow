@@ -1,6 +1,8 @@
+import { ButtonLink, Container } from "@/components/ui";
+
 export default function MarketingHomePage() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-4 px-6 py-24">
+    <Container className="justify-center gap-4 py-24">
       <p className="font-display text-sm tracking-[0.2em] text-accent uppercase">
         NimbleFlow
       </p>
@@ -12,19 +14,13 @@ export default function MarketingHomePage() {
         Open-source шаблон на Next.js: вход, кабинет, оплата и AI.
       </p>
       <div className="flex flex-wrap gap-3 pt-2">
-        <a
-          href="/login"
-          className="rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
-        >
+        <ButtonLink href="/login" size="lg">
           Войти
-        </a>
-        <a
-          href="/profile"
-          className="rounded-lg border border-border px-5 py-3 text-sm transition hover:bg-white/70"
-        >
+        </ButtonLink>
+        <ButtonLink href="/profile" variant="secondary" size="lg">
           Кабинет
-        </a>
+        </ButtonLink>
       </div>
-    </main>
+    </Container>
   );
 }

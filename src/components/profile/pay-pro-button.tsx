@@ -2,11 +2,12 @@
 
 import { useActionState } from "react";
 
+import { Button, Card, SectionTitle } from "@/components/ui";
+import { plans } from "@/config/plans";
 import {
   startProCheckoutAction,
   type CheckoutActionState,
 } from "@/lib/payments/actions";
-import { plans } from "@/config/plans";
 
 const initialState: CheckoutActionState = {};
 
@@ -21,29 +22,23 @@ export function PayProButton({ hasPro }: PayProButtonProps) {
   );
 
   return (
-    <section className="flex flex-col gap-3 border-t border-border pt-6">
-      <div className="flex flex-col gap-1">
-        <h2 className="text-sm font-medium">Подписка Pro</h2>
-        <p className="text-sm text-muted">
-          {plans.pro.priceRub} ₽ / {plans.pro.periodDays} дней
-        </p>
-      </div>
+    <Card>
+      <SectionTitle
+        title="Подписка Pro"
+        description={`${plans.pro.priceRub} ₽ / ${plans.pro.periodDays} дней`}
+      />
 
       {hasPro ? (
         <p className="text-sm text-accent">Pro уже активен</p>
       ) : (
         <form action={action}>
-          <button
-            type="submit"
-            disabled={pending}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-60"
-          >
+          <Button type="submit" size="sm" disabled={pending}>
             {pending ? "Создаём платёж…" : "Оплатить Pro"}
-          </button>
+          </Button>
         </form>
       )}
 
       {state.error ? <p className="text-sm text-red-600">{state.error}</p> : null}
-    </section>
+    </Card>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ContactVerifyCard } from "@/components/profile/contact-verify-card";
 import { PayProButton } from "@/components/profile/pay-pro-button";
+import { Button, Container, SectionHeader } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
 import { signOutAction } from "@/lib/auth/actions";
 import { isDevUserId } from "@/lib/auth/dev-login";
@@ -30,23 +31,18 @@ export default async function ProfilePage() {
   const hasPro = hasProAccess(subscription);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-16">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex flex-col gap-2">
-          <h1 className="font-display text-3xl tracking-tight">Профиль</h1>
-          <p className="text-muted">
-            {contact?.name || contact?.email || "Пользователь"}
-          </p>
-        </div>
-        <form action={signOutAction}>
-          <button
-            type="submit"
-            className="rounded-lg border border-border px-4 py-2 text-sm transition hover:bg-white/70"
-          >
-            Выйти
-          </button>
-        </form>
-      </div>
+    <Container className="gap-6 py-16">
+      <SectionHeader
+        title="Профиль"
+        description={contact?.name || contact?.email || "Пользователь"}
+        action={
+          <form action={signOutAction}>
+            <Button type="submit" variant="secondary" size="sm">
+              Выйти
+            </Button>
+          </form>
+        }
+      />
 
       <dl className="grid gap-4 text-sm">
         <div className="flex flex-col gap-1">
@@ -78,6 +74,6 @@ export default async function ProfilePage() {
       <Link href="/" className="text-sm text-accent">
         На главную
       </Link>
-    </main>
+    </Container>
   );
 }

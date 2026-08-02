@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Button, Container, SectionHeader } from "@/components/ui";
 import { getEnabledOAuthProviders } from "@/lib/auth";
 import { signInWithDevLogin, signInWithProvider } from "@/lib/auth/actions";
 import { isDevLoginEnabled } from "@/lib/auth/dev-login";
@@ -18,13 +19,16 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const devLogin = isDevLoginEnabled();
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-8 px-6 py-16">
+    <Container size="sm" className="justify-center gap-8 py-16">
       <div className="flex flex-col gap-2">
         <Link href="/" className="text-sm text-accent">
           NimbleFlow
         </Link>
-        <h1 className="font-display text-3xl tracking-tight">Вход</h1>
-        <p className="text-muted">Войдите через Яндекс или VK ID.</p>
+        <SectionHeader
+          title="Вход"
+          description="Войдите через Яндекс или VK ID."
+          className="items-stretch"
+        />
       </div>
 
       {params.error ? (
@@ -35,12 +39,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
       {devLogin ? (
         <form action={signInWithDevLogin.bind(null, callbackUrl)}>
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-accent px-4 py-3 text-sm font-medium text-white transition hover:opacity-90"
-          >
+          <Button type="submit" className="w-full">
             Войти как Dev (локально)
-          </button>
+          </Button>
         </form>
       ) : null}
 
@@ -51,12 +52,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               key={provider.id}
               action={signInWithProvider.bind(null, provider.id, callbackUrl)}
             >
-              <button
-                type="submit"
-                className="w-full rounded-lg border border-border px-4 py-3 text-sm font-medium transition hover:bg-white/70"
-              >
+              <Button type="submit" variant="secondary" className="w-full">
                 Войти через {provider.name}
-              </button>
+              </Button>
             </form>
           ))}
         </div>
@@ -67,6 +65,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <code className="text-foreground">AUTH_DEV_LOGIN=true</code>.
         </p>
       ) : null}
-    </main>
+    </Container>
   );
 }
