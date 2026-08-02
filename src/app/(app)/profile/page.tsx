@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import { AiChatCard } from "@/components/profile/ai-chat-card";
 import { ContactVerifyCard } from "@/components/profile/contact-verify-card";
 import { PayProButton } from "@/components/profile/pay-pro-button";
 import { Button, Container, SectionHeader } from "@/components/ui";
+import { getAiStatus } from "@/lib/ai";
 import { requireUser } from "@/lib/auth";
 import { signOutAction } from "@/lib/auth/actions";
 import { isDevUserId } from "@/lib/auth/dev-login";
@@ -29,6 +31,7 @@ export default async function ProfilePage() {
       });
   const effectivePlan = getEffectivePlan(subscription);
   const hasPro = hasProAccess(subscription);
+  const aiStatus = getAiStatus();
 
   return (
     <Container className="gap-6 py-16">
@@ -52,6 +55,8 @@ export default async function ProfilePage() {
       </dl>
 
       <PayProButton hasPro={hasPro} />
+
+      <AiChatCard status={aiStatus} />
 
       <ContactVerifyCard
         channel="email"

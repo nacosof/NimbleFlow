@@ -36,7 +36,7 @@
 | Auth | Auth.js **v5** — Яндекс, VK ID|
 | Database | Drizzle ORM **0.45** — PostgreSQL или MySQL (`DB_PROVIDER`) |
 | Payments | ЮKassa / Robokassa |
-| AI | подключение ИИ (`AI_PROVIDER`) |
+| AI | OpenRouter / OpenAI / Mistral / GenAPI / DeepSeek / Anthropic / Gemini / Grok (`AI_PROVIDER` + `AI_API_KEY`) |
 | Email | SMTP или Unisender |
 | SMS | SMS.ru |
 | Validation | Zod **4.4** |
@@ -55,7 +55,9 @@ cp .env.example .env
 
 В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*`).
 
-Без OAuth и БД можно просто посмотреть кабинет: в `.env` поставь `AUTH_DEV_LOGIN=true`, запусти `pnpm dev`, открой `/login` и нажми **«Войти как Dev (локально)»**. Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production — сессия без базы, для UI. Подтверждение email/телефона и оплата в этом режиме не работают.
+Для чата с нейросетью в кабинете: `AI_PROVIDER` (например `mistral` или `openrouter`), `AI_API_KEY`, опционально `AI_MODEL`. Подробнее — [`docs/setup-ai.md`](docs/setup-ai.md).
+
+Без OAuth и БД можно просто посмотреть кабинет: в `.env` поставь `AUTH_DEV_LOGIN=true`, запусти `pnpm dev`, открой `/login` и нажми **«Войти как Dev (локально)»**. Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production — сессия без базы, для UI. Подтверждение email/телефона и оплата в этом режиме не работают. Чат с AI работает, если задан `AI_API_KEY`.
 
 ```bash
 pnpm db:push
@@ -64,4 +66,4 @@ pnpm dev
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона и оплатой Pro (`/profile`), webhooks ЮKassa/Robokassa.
+Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона, оплатой Pro и чатом нейросети (`/profile`), webhooks ЮKassa/Robokassa, тарифы (`/pricing`).
