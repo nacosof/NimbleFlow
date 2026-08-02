@@ -1,10 +1,28 @@
-# NimbleFlow | В разработке
+<div align="center">
 
-**Готовый каркас сайта на Next.js**
+# NimbleFlow
 
-Клонируешь репозиторий, заполняешь ключи — получаешь связанный проект: лендинг, вход, кабинет, оплату и AI.
+*в разработке*
 
-Это не облачный сервис и не набор кнопок. Это **исходный код твоего проекта**, который можно менять и деплоить куда угодно.
+</div>
+
+# Сэкономьте часы на написании повторяющегося кода, выпускайте продукты быстро и получайте прибыль!
+
+Готовый каркас сайта на Next.js: лендинг, вход, кабинет, оплату и AI.
+
+Клонируешь репозиторий, заполняешь ключи — получаешь связанный проект. Это не облачный сервис и не набор кнопок. Это **исходный код твоего проекта**, который можно менять и деплоить куда угодно.
+
+<div align="center">
+
+![Next.js, React, Tailwind, TypeScript, Node.js, PostgreSQL, MySQL, pnpm](https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,nodejs,postgres,mysql,pnpm)
+
+![Auth.js](https://img.shields.io/badge/Auth.js-v5-black?style=flat-square)
+![Drizzle](https://img.shields.io/badge/Drizzle-0.45-C5F74F?style=flat-square)
+![Zod](https://img.shields.io/badge/Zod-4.4-3E67B1?style=flat-square)
+![ЮKassa](https://img.shields.io/badge/ЮKassa-ready-7B61FF?style=flat-square)
+![Robokassa](https://img.shields.io/badge/Robokassa-ready-2E7D32?style=flat-square)
+
+</div>
 
 ---
 
