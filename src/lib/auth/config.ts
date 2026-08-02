@@ -84,6 +84,23 @@ function buildAuthConfig(): NextAuthConfig {
       },
     },
     events: {
+      async createUser({ user }) {
+        if (!user.email) {
+          return;
+        }
+
+        try {
+          const { sendEmail, welcomeEmail } = await import("@/lib/email");
+          await sendEmail(
+            welcomeEmail({
+              to: user.email,
+              name: user.name,
+            }),
+          );
+        } catch (error) {
+          console.error("[email] welcome failed", error);
+        }
+      },
       async signIn({ user, account }) {
         if (!user.id || !account?.provider || !account.providerAccountId) {
           return;

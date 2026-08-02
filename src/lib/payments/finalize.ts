@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { db, tables } from "@/db/runtime";
-import { sendEmail } from "@/lib/email";
+import { paymentSucceededEmail, sendEmail } from "@/lib/email";
 import { grantPlan } from "@/lib/subscription";
 import { resolvePlanId } from "@/lib/subscription/access";
 
@@ -54,12 +54,19 @@ export async function finalizeSucceededPayment(
   const email = users[0]?.email;
   if (email) {
     const amount = (payment.amountKopeks / 100).toFixed(2);
-    await sendEmail({
-      to: email,
-      subject: "Оплата NimbleFlow Pro прошла успешно",
-      text: `Оплата ${amount} ${payment.currency} прошла успешно. План Pro активирован.`,
-      html: `<p>Оплата <strong>${amount} ${payment.currency}</strong> прошла успешно.</p><p>План <strong>Pro</strong> активирован.</p>`,
-    });
+    try {
+      await sendEmail(
+        paymentSucceededEmail({
+          to: email,
+          name: users[0]?.name,
+          amount,
+          currency: payment.currency,
+          plan,
+        }),
+      );
+    } catch (error) {
+      console.error("[email] payment-succeeded failed", error);
+    }
   }
 
   return { payment, alreadyProcessed: false as const };
