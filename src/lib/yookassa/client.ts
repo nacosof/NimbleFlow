@@ -59,7 +59,7 @@ export function createYooKassaProvider(): PaymentProvider {
             type: "redirect",
             return_url: input.returnUrl || config.returnUrl,
           },
-          description: input.description,
+          description: input.description.slice(0, 128),
           metadata: {
             paymentId: input.paymentId,
             userId: input.userId,

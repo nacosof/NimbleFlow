@@ -64,4 +64,4 @@ pnpm dev
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона и оплатой Pro (`/profile`). Webhook оплаты — дальше.
+Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона и оплатой Pro (`/profile`), webhooks ЮKassa/Robokassa.
