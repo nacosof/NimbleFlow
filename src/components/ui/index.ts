@@ -1,4 +1,4 @@
-export { Button, ButtonLink, buttonClassName } from "./button";
+export { Button, ButtonExternal, ButtonLink, buttonClassName } from "./button";
 export type { ButtonSize, ButtonVariant } from "./button";
 export { Input } from "./input";
 export { Card } from "./card";

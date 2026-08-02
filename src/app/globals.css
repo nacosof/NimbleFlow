@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #eef2f0;
+  --background: #e8eee9;
   --foreground: #121816;
   --muted: #4d5a54;
   --accent: #0f3d2e;
-  --border: #d5ddd8;
-  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --accent-soft: #1a5c45;
+  --surface: #f5f8f6;
+  --border: #cfd8d2;
+  --hero-deep: #0a2e22;
+  --hero-mid: #134a36;
 }
 
 @theme inline {
@@ -15,7 +17,11 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-surface: var(--surface);
   --color-border: var(--border);
+  --color-hero-deep: var(--hero-deep);
+  --color-hero-mid: var(--hero-mid);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 }
@@ -24,4 +30,73 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+@keyframes nf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nf-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(1.5%, -1%, 0) scale(1.03);
+  }
+}
+
+.nf-rise {
+  animation: nf-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nf-rise-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.nf-rise-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.nf-rise-delay-3 {
+  animation-delay: 0.36s;
+}
+
+.nf-fade {
+  animation: nf-fade 1.1s ease both;
+}
+
+.nf-drift {
+  animation: nf-drift 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-rise,
+  .nf-rise-delay-1,
+  .nf-rise-delay-2,
+  .nf-rise-delay-3,
+  .nf-fade,
+  .nf-drift {
+    animation: none;
+  }
 }

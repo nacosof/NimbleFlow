@@ -6,6 +6,7 @@ import type {
   CreatePaymentResult,
   PaymentProvider,
 } from "@/lib/payments/types";
+import { getPaymentFailUrl, getPaymentSuccessUrl } from "@/lib/payments/urls";
 
 function requireRobokassaConfig() {
   const env = getEnv();
@@ -68,12 +69,11 @@ export function createRobokassaProvider(): PaymentProvider {
         params.set("IsTest", "1");
       }
 
-      if (config.successUrl) {
-        params.set("SuccessURL", config.successUrl);
-      }
-      if (config.failUrl) {
-        params.set("FailURL", config.failUrl);
-      }
+      params.set(
+        "SuccessURL",
+        config.successUrl || input.returnUrl || getPaymentSuccessUrl(),
+      );
+      params.set("FailURL", config.failUrl || getPaymentFailUrl());
 
       const redirectUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?${params.toString()}`;
 

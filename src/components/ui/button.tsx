@@ -8,6 +8,10 @@ const variants = {
     "bg-accent text-white hover:opacity-90 disabled:opacity-60",
   secondary:
     "border border-border transition hover:bg-white/70 disabled:opacity-60",
+  inverse:
+    "border-0 bg-white text-accent hover:opacity-90 disabled:opacity-60",
+  onDark:
+    "border border-white/30 text-white transition hover:bg-white/10 disabled:opacity-60",
 } as const;
 
 const sizes = {
@@ -72,5 +76,32 @@ export function ButtonLink({
     <Link href={href} className={buttonClassName({ variant, size, className })}>
       {children}
     </Link>
+  );
+}
+
+type ButtonExternalProps = {
+  href: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  className?: string;
+  children: React.ReactNode;
+};
+
+export function ButtonExternal({
+  href,
+  variant = "primary",
+  size = "md",
+  className,
+  children,
+}: ButtonExternalProps) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={buttonClassName({ variant, size, className })}
+    >
+      {children}
+    </a>
   );
 }

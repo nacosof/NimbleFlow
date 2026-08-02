@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+import { ButtonLink, Container, SectionHeader } from "@/components/ui";
+
+export const metadata: Metadata = {
+  title: "Оплата принята",
+  description: "Возврат после успешной оплаты.",
+};
+
+export default function PaymentSuccessPage() {
+  return (
+    <Container size="sm" className="justify-center gap-6 py-20">
+      <Link href="/" className="text-sm text-accent">
+        NimbleFlow
+      </Link>
+      <SectionHeader
+        title="Спасибо"
+        description="Вы вернулись с платёжной страницы. Статус Pro обновится после webhook — обычно за несколько секунд."
+      />
+      <div className="flex flex-wrap gap-3">
+        <ButtonLink href="/profile">Открыть кабинет</ButtonLink>
+        <ButtonLink href="/pricing" variant="secondary">
+          К тарифам
+        </ButtonLink>
+      </div>
+    </Container>
+  );
+}

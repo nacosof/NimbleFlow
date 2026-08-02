@@ -1,0 +1,9 @@
+export { Faq } from "./faq";
+export { Features } from "./features";
+export { FinalCta } from "./final-cta";
+export { Hero } from "./hero";
+export { Pricing } from "./pricing";
+export { Problem } from "./problem";
+export { MarketingShell } from "./shell";
+export { SiteFooter } from "./site-footer";
+export { SiteHeader } from "./site-header";
