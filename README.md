@@ -38,6 +38,7 @@
 | Payments | ЮKassa / Robokassa |
 | AI | подключение ИИ (`AI_PROVIDER`) |
 | Email | SMTP или Unisender |
+| SMS | SMS.ru |
 | Validation | Zod **4.4** |
 | Package manager | pnpm **10** |
 

@@ -7,19 +7,4 @@ export const site = {
   locale: "ru-RU",
 } as const;
 
-export const plans = {
-  free: {
-    id: "free",
-    name: "Free",
-    priceRub: 0,
-    periodDays: null,
-  },
-  pro: {
-    id: "pro",
-    name: "Pro",
-    priceRub: 990,
-    periodDays: 30,
-  },
-} as const;
-
-export type PlanId = keyof typeof plans;
+export { plans, type PlanId } from "./plans";
