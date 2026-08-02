@@ -12,6 +12,9 @@ const envSchema = z.object({
     z.string().url().default("http://localhost:3000"),
   ),
   AUTH_SECRET: optionalString,
+  AUTH_TRUST_HOST: z
+    .preprocess(emptyToUndefined, z.enum(["true", "false"]).optional())
+    .transform((value) => value !== "false"),
   DB_PROVIDER: z.enum(["postgres", "mysql"]).default("postgres"),
   DATABASE_URL: optionalString,
   DATABASE_URL_UNPOOLED: optionalString,

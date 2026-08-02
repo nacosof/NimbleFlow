@@ -9,9 +9,22 @@ export default function MarketingHomePage() {
         SaaS-сервиса или любого другого веб-приложения
       </h1>
       <p className="max-w-xl text-lg text-muted">
-        Open-source шаблон на Next.js: регистрация и вход через российские
-        сервисы, оплата, профиль и готовое подключение нейросетей.
+        Open-source шаблон на Next.js: вход, кабинет, оплата и AI.
       </p>
+      <div className="flex flex-wrap gap-3 pt-2">
+        <a
+          href="/login"
+          className="rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+        >
+          Войти
+        </a>
+        <a
+          href="/profile"
+          className="rounded-lg border border-border px-5 py-3 text-sm transition hover:bg-white/70"
+        >
+          Профиль
+        </a>
+      </div>
     </main>
   );
 }

@@ -52,7 +52,7 @@ pnpm install
 cp .env.example .env
 ```
 
-В `.env` укажи `DATABASE_URL` и при необходимости `DB_PROVIDER=postgres|mysql`.
+В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*` / `AUTH_MAILRU_*`).
 
 ```bash
 pnpm db:push
@@ -61,4 +61,4 @@ pnpm dev
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), профиль (`/profile`), env-конфиг, схема БД (Drizzle). Auth и оплата — дальше.
+Сейчас: лендинг (`/`), вход (`/login`), профиль (`/profile`, нужен логин), схема БД. Оплата и форма телефон/email — дальше.
