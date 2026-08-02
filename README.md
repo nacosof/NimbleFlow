@@ -44,7 +44,7 @@
 
 ---
 
-## Быстрый старт 
+## Быстрый старт
 
 ```bash
 git clone https://github.com/nacosof/NimbleFlow.git
@@ -53,11 +53,13 @@ pnpm install
 cp .env.example .env
 ```
 
-В `.env` укажи `DATABASE_URL`, `AUTH_SECRET` и ключи OAuth (`AUTH_YANDEX_*` / `AUTH_VK_*`).
+Все переменные и подсказки «где взять» — в [`.env.example`](.env.example). Скопируй его в `.env` и заполни то, что нужно для работы:
 
-Для работы с нейросетью в кабинете укажи: `AI_PROVIDER`, `AI_API_KEY`, опционально `AI_MODEL`. Подробнее — [`docs/setup-ai.md`](docs/setup-ai.md).
-
-Без OAuth и БД можно просто посмотреть кабинет: в `.env` поставь `AUTH_DEV_LOGIN=true`, запусти `pnpm dev`, открой `/login` и нажми **«Войти как Dev (локально)»**. Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production — сессия без базы, для UI. Подтверждение email/телефона и оплата в этом режиме не работают. Чат с AI работает, если задан `AI_API_KEY`.
+- база данных: `DATABASE_URL`, `DB_PROVIDER`
+- auth: `AUTH_SECRET`, `AUTH_YANDEX_*` / `AUTH_VK_*`
+- оплата: `PAYMENT_PROVIDER` + ключи ЮKassa (`YOOKASSA_*`) или Robokassa (`ROBOKASSA_*`)
+- нейросеть: `AI_PROVIDER`, `AI_API_KEY` (опционально `AI_MODEL`) — [`docs/setup-ai.md`](docs/setup-ai.md)
+- почта / SMS: `EMAIL_PROVIDER` + SMTP/Unisender, `SMS_PROVIDER` + SMS.ru
 
 ```bash
 pnpm db:push
@@ -66,4 +68,20 @@ pnpm dev
 
 Открой http://localhost:3000
 
-Сейчас: лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона, оплатой Pro и чатом нейросети (`/profile`), webhooks ЮKassa/Robokassa, тарифы (`/pricing`).
+---
+
+## Dev Login
+
+Удобно при разработке: можно править кабинет и страницы без живой БД и OAuth.
+
+1. В `.env` поставь `AUTH_DEV_LOGIN=true`
+2. Запусти `pnpm dev`
+3. Открой `/login` → **«Войти как Dev (локально)»**
+
+Кнопка есть только при `AUTH_DEV_LOGIN=true` и только вне production. Сессия без базы. Подтверждение email/телефона и оплата в этом режиме не работают. Чат с AI работает, если задан `AI_API_KEY`.
+
+---
+
+## Что уже есть
+
+Лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона, оплатой Pro и чатом нейросети (`/profile`), webhooks ЮKassa/Robokassa, тарифы (`/pricing`).
