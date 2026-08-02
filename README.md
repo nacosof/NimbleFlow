@@ -14,6 +14,14 @@
 
 <div align="center">
 
+### NimbleFlow + AI =
+
+<img src="public/readme/ai-equation.png" alt="NimbleFlow плюс Cursor, Claude, ChatGPT, Gemini, Grok, DeepSeek равно Запусти свой проект мгновенно" width="720" />
+
+Отдай этот репозиторий в **Cursor / Claude / ChatGPT / Gemini / Grok / DeepSeek**, опиши свой продукт — и допиливай каркас под себя, а не собирай auth, оплату и кабинет с нуля.
+
+<br />
+
 ![Next.js, React, Tailwind, TypeScript, Node.js, PostgreSQL, MySQL, pnpm](https://skillicons.dev/icons?i=nextjs,react,tailwind,ts,nodejs,postgres,mysql,pnpm)
 
 ![Auth.js](https://img.shields.io/badge/Auth.js-v5-black?style=flat-square)
@@ -26,6 +34,56 @@
 
 ---
 
+## Что внутри
+
+| Модуль | Что получаешь |
+|--------|----------------|
+| **Лендинг** | Продуктовая витрина: hero, возможности, тарифы, FAQ, CTA |
+| **Auth** | Вход через Яндекс и VK ID (+ Dev Login для локалки) |
+| **Кабинет** | Профиль, план Free/Pro, empty/paid состояния |
+| **Оплата** | ЮKassa или Robokassa, создание платежа и webhooks |
+| **Подтверждения** | OTP для email и телефона в профиле |
+| **AI** | Чат в кабинете: `AI_PROVIDER` + `AI_API_KEY` |
+| **Письма / SMS** | SMTP или Unisender, SMS.ru или console |
+| **Документы** | Шаблоны оферты, политики ПДн, пользовательского соглашения |
+| **SEO** | metadata, `sitemap.xml`, `robots.txt`, Open Graph |
+| **Docs** | Гайды по OAuth, платежам, ngrok и деплою |
+
+---
+
+## Архитектура
+
+```text
+src/
+├── app/
+│   ├── (marketing)/     # /, /login, /pricing, /legal/*, /payments/*
+│   ├── (app)/           # /profile — кабинет
+│   └── api/
+│       ├── auth/        # Auth.js + VK callback
+│       ├── payments/    # создание платежа
+│       ├── ai/chat/     # чат с нейросетью
+│       └── webhooks/    # yookassa, robokassa
+├── components/
+│   ├── ui/              # Button, Input, Card, …
+│   ├── marketing/       # секции лендинга
+│   ├── app/             # кабинет: аккаунт, подписка
+│   └── profile/         # OTP, AI-чат
+├── config/              # site, plans, env, legal
+├── db/                  # Drizzle schema + runtime
+└── lib/
+    ├── auth/            # сессия, OAuth, verification
+    ├── payments/        # checkout, finalize
+    ├── yookassa/ · robokassa/
+    ├── subscription/    # Free / Pro
+    ├── email/ · sms/
+    ├── ai/              # провайдеры нейронок
+    └── seo/
+```
+
+Конфиг и секреты — через `.env` (см. [`.env.example`](.env.example)). Подробности модулей — в [`docs/`](docs/README.md).
+
+---
+
 ## Стек
 
 | Слой | Выбор |
@@ -33,7 +91,7 @@
 | Framework | Next.js **16.2**, React **19.2** |
 | Language | TypeScript **5.9** |
 | UI | Tailwind CSS **4.3** |
-| Auth | Auth.js **v5** — Яндекс, VK ID|
+| Auth | Auth.js **v5** — Яндекс, VK ID |
 | Database | Drizzle ORM **0.45** — PostgreSQL или MySQL (`DB_PROVIDER`) |
 | Payments | ЮKassa / Robokassa |
 | AI | OpenRouter / OpenAI / Mistral / GenAPI / DeepSeek / Anthropic / Gemini / Grok (`AI_PROVIDER` + `AI_API_KEY`) |
@@ -61,6 +119,8 @@ cp .env.example .env
 - нейросеть: `AI_PROVIDER`, `AI_API_KEY` (опционально `AI_MODEL`) — [`docs/setup-ai.md`](docs/setup-ai.md)
 - почта / SMS: `EMAIL_PROVIDER` + SMTP/Unisender, `SMS_PROVIDER` + SMS.ru
 
+Подробные гайды (OAuth, платежи, ngrok, деплой): **[`docs/`](docs/README.md)**.
+
 ```bash
 pnpm db:push
 pnpm dev
@@ -82,6 +142,13 @@ pnpm dev
 
 ---
 
-## Что уже есть
+## Страницы
 
-Лендинг (`/`), вход OAuth (`/login`), профиль с подтверждением email/телефона, оплатой Pro и чатом нейросети (`/profile`), webhooks ЮKassa/Robokassa, тарифы (`/pricing`).
+| Путь | Назначение |
+|------|------------|
+| `/` | Лендинг |
+| `/login` | Вход |
+| `/pricing` | Тарифы Free / Pro |
+| `/profile` | Кабинет |
+| `/legal/terms` · `/legal/offer` · `/legal/privacy` | Юр. шаблоны |
+| `/payments/success` · `/payments/fail` | Возврат после оплаты |
