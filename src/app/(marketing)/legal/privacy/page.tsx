@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-
 import { LegalShell } from "@/components/legal/legal-shell";
 import { legal } from "@/config/legal";
 import { site } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Политика конфиденциальности",
   description: `Шаблон политики обработки персональных данных сервиса ${site.name}.`,
-};
+  path: "/legal/privacy",
+});
+
 
 export default function PrivacyPage() {
   return (

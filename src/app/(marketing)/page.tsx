@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import {
   Faq,
   Features,
@@ -11,17 +9,15 @@ import {
   SiteHeader,
 } from "@/components/marketing";
 import { site } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: `${site.name} — шаблон SaaS на Next.js`,
-  },
+export const metadata = createPageMetadata({
+  title: `${site.name} — шаблон SaaS на Next.js`,
   description: site.description,
-  openGraph: {
-    title: `${site.name} — шаблон SaaS на Next.js`,
-    description: site.description,
-  },
-};
+  path: "/",
+  absoluteTitle: true,
+});
+
 
 export default function MarketingHomePage() {
   return (

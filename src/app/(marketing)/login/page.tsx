@@ -4,6 +4,13 @@ import { Button, Container, SectionHeader } from "@/components/ui";
 import { getEnabledOAuthProviders } from "@/lib/auth";
 import { signInWithDevLogin, signInWithProvider } from "@/lib/auth/actions";
 import { isDevLoginEnabled } from "@/lib/auth/dev-login";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Вход",
+  description: "Войдите через Яндекс или VK ID.",
+  path: "/login",
+});
 
 type LoginPageProps = {
   searchParams: Promise<{

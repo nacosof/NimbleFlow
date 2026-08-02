@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CheckoutProButton } from "@/components/payments/checkout-pro-button";
@@ -6,16 +5,19 @@ import { ButtonLink, Container, SectionHeader } from "@/components/ui";
 import { plans } from "@/config/plans";
 import { getCurrentUser } from "@/lib/auth";
 import { isDevUserId } from "@/lib/auth/dev-login";
+import { createPageMetadata } from "@/lib/seo";
 import {
   getEffectivePlan,
   getUserSubscription,
   hasProAccess,
 } from "@/lib/subscription";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Тарифы",
   description: "Free и Pro: демо оплаты через ЮKassa или Robokassa.",
-};
+  path: "/pricing",
+});
+
 
 export const dynamic = "force-dynamic";
 

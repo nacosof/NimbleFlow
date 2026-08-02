@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { AccountSummary, PlanStatus } from "@/components/app";
@@ -10,16 +9,20 @@ import { requireUser } from "@/lib/auth";
 import { signOutAction } from "@/lib/auth/actions";
 import { isDevUserId } from "@/lib/auth/dev-login";
 import { getProfileContact } from "@/lib/auth/verification/service";
+import { createPageMetadata } from "@/lib/seo";
 import {
   getEffectivePlan,
   getUserSubscription,
   hasProAccess,
 } from "@/lib/subscription";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Кабинет",
   description: "Профиль, подписка, подтверждение контактов и AI-чат.",
-};
+  path: "/profile",
+  noIndex: true,
+});
+
 
 export const dynamic = "force-dynamic";
 

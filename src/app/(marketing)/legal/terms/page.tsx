@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-
 import { LegalShell } from "@/components/legal/legal-shell";
 import { legal } from "@/config/legal";
 import { site } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Пользовательское соглашение",
   description: `Шаблон пользовательского соглашения сервиса ${site.name}.`,
-};
+  path: "/legal/terms",
+});
+
 
 export default function TermsPage() {
   return (

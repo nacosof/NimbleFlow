@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ButtonLink, Container, SectionHeader } from "@/components/ui";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Оплата принята",
   description: "Возврат после успешной оплаты.",
-};
+  path: "/payments/success",
+  noIndex: true,
+});
+
 
 export default function PaymentSuccessPage() {
   return (

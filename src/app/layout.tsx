@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Unbounded } from "next/font/google";
 
-import { site } from "@/config/site";
+import { rootMetadata } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -17,21 +17,7 @@ const display = Unbounded({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: site.title,
-    template: `%s · ${site.name}`,
-  },
-  description: site.description,
-  metadataBase: new URL(site.url),
-  openGraph: {
-    title: site.title,
-    description: site.description,
-    locale: site.locale,
-    type: "website",
-    siteName: site.name,
-  },
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
