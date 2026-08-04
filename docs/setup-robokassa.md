@@ -34,9 +34,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 | SuccessURL | `{APP}/payments/success` |
 | FailURL | `{APP}/payments/fail` |
 
-Локально для ResultURL нужен публичный HTTPS — см. [ngrok](./setup-webhooks-ngrok.md).
-
-ResultURL должен отвечать `OK{InvId}` после успешной обработки (так и сделано в коде).
+ResultURL должен быть доступен из интернета по HTTPS (после [деплоя](./deploy.md)). Ответ после успешной обработки — `OK{InvId}` (так сделано в коде).
 
 ## 3. Чеки 54-ФЗ (фискализация)
 

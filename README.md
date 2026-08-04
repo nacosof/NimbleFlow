@@ -47,7 +47,7 @@
 | **Документы** | Шаблоны оферты, политики ПДн, пользовательского соглашения |
 | **SEO** | metadata, `sitemap.xml`, `robots.txt`, Open Graph |
 | **Метрика** | Яндекс Метрика через `NEXT_PUBLIC_YANDEX_METRIKA_ID` |
-| **Docs** | Гайды по OAuth, платежам, Метрике, ngrok и деплою; [карта модулей](docs/modules.md) |
+| **Docs** | Гайды по OAuth, платежам, Метрике и деплою; [карта модулей](docs/modules.md) |
 
 ---
 
@@ -121,7 +121,7 @@ cp .env.example .env
 - нейросеть: `AI_PROVIDER`, `AI_API_KEY` (опционально `AI_MODEL`) — [`docs/setup-ai.md`](docs/setup-ai.md)
 - почта / SMS: `EMAIL_PROVIDER` + SMTP/Unisender, `SMS_PROVIDER` + SMS.ru
 
-Подробные гайды (OAuth, платежи, ngrok, деплой): **[`docs/`](docs/README.md)**.
+Подробные гайды (OAuth, платежи, деплой): **[`docs/`](docs/README.md)**.
 
 ```bash
 pnpm db:push
@@ -164,7 +164,7 @@ pnpm dev
 1. `pnpm install` → `pnpm db:push` → `pnpm dev`
 2. `/login` — вход через Яндекс или VK ID
 3. `/profile` — кабинет, OTP email/телефона
-4. `/pricing` или кабинет — тестовая оплата Pro (ЮKassa или Robokassa + webhook; локально см. [`docs/setup-webhooks-ngrok.md`](docs/setup-webhooks-ngrok.md))
+4. `/pricing` или кабинет — тестовая оплата Pro (ЮKassa или Robokassa + webhook на публичном HTTPS, см. [`docs/deploy.md`](docs/deploy.md))
 5. В профиле план = **pro**
 6. Письмо welcome / payment-succeeded уходит через SMTP|Unisender или пишется в лог (если почта не настроена)
 

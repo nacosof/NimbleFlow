@@ -94,7 +94,7 @@ Env: `DATABASE_URL`, `DB_PROVIDER`.
 Env: `RECEIPT_ENABLED`, `RECEIPT_SNO`, `RECEIPT_VAT`.  
 Нужен email или телефон в профиле. Без кассы в ЛК провайдера — оставь `false`.
 
-Локальные webhook: [ngrok](./setup-webhooks-ngrok.md).
+Webhook на проде: публичный HTTPS после [деплоя](./deploy.md).
 
 ---
 

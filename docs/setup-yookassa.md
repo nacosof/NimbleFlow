@@ -28,7 +28,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 {NEXT_PUBLIC_APP_URL}/api/webhooks/yookassa
 ```
 
-Локально ЮKassa не достучится до `localhost` — используй [ngrok](./setup-webhooks-ngrok.md).
+Webhook должен быть на **публичном HTTPS** (VPS / PaaS) — см. [deploy](./deploy.md). С `localhost` ЮKassa не достучится.
 
 На проде в webhook проверяются IP ЮKassa; статус платежа дополнительно перепроверяется через API.
 
