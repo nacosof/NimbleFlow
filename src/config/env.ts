@@ -11,6 +11,7 @@ const envSchema = z.object({
     emptyToUndefined,
     z.string().url().default("http://localhost:3000"),
   ),
+  NEXT_PUBLIC_YANDEX_METRIKA_ID: optionalString,
   AUTH_SECRET: optionalString,
   AUTH_TRUST_HOST: z
     .preprocess(emptyToUndefined, z.enum(["true", "false"]).optional())

@@ -45,7 +45,8 @@
 | **Письма / SMS** | SMTP или Unisender, SMS.ru или console |
 | **Документы** | Шаблоны оферты, политики ПДн, пользовательского соглашения |
 | **SEO** | metadata, `sitemap.xml`, `robots.txt`, Open Graph |
-| **Docs** | Гайды по OAuth, платежам, ngrok и деплою |
+| **Метрика** | Яндекс Метрика через `NEXT_PUBLIC_YANDEX_METRIKA_ID` |
+| **Docs** | Гайды по OAuth, платежам, Метрике, ngrok и деплою |
 
 ---
 
@@ -75,6 +76,7 @@ src/
     ├── subscription/    # Free / Pro
     ├── email/ · sms/
     ├── ai/              # провайдеры нейронок
+    ├── analytics/       # Яндекс Метрика
     └── seo/
 ```
 

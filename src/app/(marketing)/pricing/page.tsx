@@ -48,7 +48,7 @@ export default async function PricingPage() {
         </Link>
         <SectionHeader
           title="Тарифы"
-          description="Демо платного контура для SaaS, который вы соберёте на шаблоне. Сам репозиторий бесплатный."
+          description="Демо платного контура для SaaS, который вы соберёте на шаблоне."
         />
       </div>
 

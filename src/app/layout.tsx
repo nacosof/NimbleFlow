@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Unbounded } from "next/font/google";
 
+import { YandexMetrika } from "@/components/analytics";
 import { rootMetadata } from "@/lib/seo";
 
 import "./globals.css";
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         {children}
+        <YandexMetrika />
       </body>
     </html>
   );

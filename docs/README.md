@@ -10,7 +10,8 @@
 4. Оплата: [ЮKassa](./setup-yookassa.md) или [Robokassa](./setup-robokassa.md)
 5. Локальные webhook: [ngrok](./setup-webhooks-ngrok.md)
 6. AI (по желанию): [setup-ai](./setup-ai.md)
-7. Выкладка: [Deploy](./deploy.md)
+7. Аналитика: [Яндекс Метрика](./setup-yandex-metrika.md)
+8. Выкладка: [Deploy](./deploy.md)
 
 ## Список
 
@@ -22,4 +23,5 @@
 | Robokassa | [setup-robokassa.md](./setup-robokassa.md) |
 | Webhook + ngrok | [setup-webhooks-ngrok.md](./setup-webhooks-ngrok.md) |
 | AI-чат | [setup-ai.md](./setup-ai.md) |
+| Яндекс Метрика | [setup-yandex-metrika.md](./setup-yandex-metrika.md) |
 | Деплой | [deploy.md](./deploy.md) |

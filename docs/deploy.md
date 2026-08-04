@@ -10,6 +10,7 @@
 4. `AUTH_SECRET` — новый секрет, не коммить в git.
 5. `AUTH_DEV_LOGIN=false` (в production кнопка Dev и так отключена).
 6. БД Postgres или MySQL доступна с приложения; схема через `pnpm db:push` / миграции.
+7. Опционально: `NEXT_PUBLIC_YANDEX_METRIKA_ID` — см. [setup-yandex-metrika.md](./setup-yandex-metrika.md).
 
 ---
 

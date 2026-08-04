@@ -27,7 +27,7 @@ export function Hero() {
               веб-приложения
             </h1>
             <p className="nf-rise nf-rise-delay-2 mt-5 max-w-md text-base text-white/75 sm:text-lg">
-              Open-source шаблон на Next.js: вход, кабинет, оплата и AI.
+              Шаблон на Next.js: вход, кабинет, оплата и AI.
             </p>
             <div className="nf-rise nf-rise-delay-3 mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/login" size="lg" variant="inverse">
