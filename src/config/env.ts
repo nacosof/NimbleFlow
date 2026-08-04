@@ -63,12 +63,17 @@ const envSchema = z.object({
       "anthropic",
       "gemini",
       "grok",
+      "gigachat",
       "openai_compatible",
     ])
     .default("openrouter"),
   AI_API_KEY: optionalString,
   AI_BASE_URL: optionalString,
   AI_MODEL: optionalString,
+  GIGACHAT_SCOPE: z
+    .enum(["GIGACHAT_API_PERS", "GIGACHAT_API_B2B", "GIGACHAT_API_CORP"])
+    .default("GIGACHAT_API_PERS"),
+  GIGACHAT_AUTH_URL: optionalString,
 });
 
 export type Env = z.infer<typeof envSchema>;

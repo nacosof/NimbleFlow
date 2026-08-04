@@ -1,4 +1,8 @@
 import { getEnv } from "@/config/env";
+import {
+  getGigaChatAccessToken,
+  getGigaChatApiBaseUrl,
+} from "@/lib/ai/gigachat";
 import { getAiProviderConfig } from "@/lib/ai/providers";
 import type {
   AiProviderId,
@@ -151,6 +155,53 @@ async function chatAnthropic(input: {
   };
 }
 
+async function chatGigaChat(input: {
+  messages: ChatMessage[];
+  model: string;
+}): Promise<ChatCompletionResult> {
+  const accessToken = await getGigaChatAccessToken();
+  const baseUrl = getGigaChatApiBaseUrl();
+
+  const response = await fetch(`${baseUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: input.model,
+      messages: input.messages,
+    }),
+  });
+
+  const payload = (await response.json()) as {
+    error?: { message?: string };
+    message?: string;
+    choices?: Array<{ message?: { content?: string } }>;
+    model?: string;
+  };
+
+  if (!response.ok) {
+    throw new Error(
+      payload.error?.message ||
+        payload.message ||
+        `GigaChat request failed (${response.status})`,
+    );
+  }
+
+  const content = payload.choices?.[0]?.message?.content?.trim();
+  if (!content) {
+    throw new Error("Пустой ответ модели");
+  }
+
+  return {
+    content,
+    model: payload.model || input.model,
+    provider: "gigachat",
+  };
+}
+
 export async function chatCompletion(input: {
   messages: ChatMessage[];
   model?: string;
@@ -165,6 +216,10 @@ export async function chatCompletion(input: {
 
   if (config.kind === "anthropic") {
     return chatAnthropic({ messages: input.messages, model });
+  }
+
+  if (config.kind === "gigachat") {
+    return chatGigaChat({ messages: input.messages, model });
   }
 
   return chatOpenAiCompatible({

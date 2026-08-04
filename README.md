@@ -95,7 +95,7 @@ src/
 | Auth | Auth.js **v5** — Яндекс, VK ID |
 | Database | Drizzle ORM **0.45** — PostgreSQL или MySQL (`DB_PROVIDER`) |
 | Payments | ЮKassa / Robokassa |
-| AI | OpenRouter / OpenAI / Mistral / GenAPI / DeepSeek / Anthropic / Gemini / Grok (`AI_PROVIDER` + `AI_API_KEY`) |
+| AI | OpenRouter / OpenAI / Mistral / GenAPI / DeepSeek / Anthropic / Gemini / Grok / **GigaChat** (`AI_PROVIDER` + `AI_API_KEY`) |
 | Email | SMTP или Unisender |
 | SMS | SMS.ru |
 | Validation | Zod **4.4** |

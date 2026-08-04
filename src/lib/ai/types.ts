@@ -18,7 +18,7 @@ export type ChatCompletionResult = {
 export type AiProviderConfig = {
   id: AiProviderId;
   label: string;
-  kind: "openai" | "anthropic";
+  kind: "openai" | "anthropic" | "gigachat";
   baseUrl: string;
   defaultModel: string;
 };

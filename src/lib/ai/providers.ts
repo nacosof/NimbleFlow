@@ -57,6 +57,13 @@ const providers: Record<AiProviderId, AiProviderConfig> = {
     baseUrl: "https://api.x.ai/v1",
     defaultModel: "grok-2-latest",
   },
+  gigachat: {
+    id: "gigachat",
+    label: "GigaChat",
+    kind: "gigachat",
+    baseUrl: "https://api.giga.chat/v1",
+    defaultModel: "GigaChat-2",
+  },
   openai_compatible: {
     id: "openai_compatible",
     label: "OpenAI-compatible",
