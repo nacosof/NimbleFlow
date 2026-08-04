@@ -42,6 +42,34 @@ const envSchema = z.object({
   ROBOKASSA_RESULT_URL: optionalString,
   ROBOKASSA_SUCCESS_URL: optionalString,
   ROBOKASSA_FAIL_URL: optionalString,
+  RECEIPT_ENABLED: z
+    .preprocess(emptyToUndefined, z.enum(["true", "false"]).optional())
+    .transform((value) => value === "true"),
+  RECEIPT_SNO: z
+    .enum([
+      "osn",
+      "usn_income",
+      "usn_income_outcome",
+      "esn",
+      "patent",
+    ])
+    .default("usn_income"),
+  RECEIPT_VAT: z
+    .enum([
+      "none",
+      "vat0",
+      "vat10",
+      "vat20",
+      "vat22",
+      "vat110",
+      "vat120",
+      "vat122",
+      "vat5",
+      "vat7",
+      "vat105",
+      "vat107",
+    ])
+    .default("none"),
   EMAIL_PROVIDER: z.enum(["smtp", "unisender"]).default("smtp"),
   SMTP_HOST: optionalString,
   SMTP_PORT: z.preprocess(

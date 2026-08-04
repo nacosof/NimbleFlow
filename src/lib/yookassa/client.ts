@@ -1,4 +1,8 @@
 import { getEnv } from "@/config/env";
+import {
+  buildYooKassaReceipt,
+  isReceiptEnabled,
+} from "@/lib/payments/receipt";
 import type {
   CreatePaymentInput,
   CreatePaymentResult,
@@ -16,6 +20,7 @@ type YooKassaPaymentResponse = {
   amount?: { value: string; currency: string };
   description?: string;
   metadata?: Record<string, string>;
+  receipt_registration?: string;
 };
 
 function requireYooKassaConfig() {
@@ -41,6 +46,33 @@ export function createYooKassaProvider(): PaymentProvider {
         `${config.shopId}:${config.secretKey}`,
       ).toString("base64");
 
+      const body: Record<string, unknown> = {
+        amount: {
+          value: amountValue,
+          currency: input.currency,
+        },
+        capture: true,
+        confirmation: {
+          type: "redirect",
+          return_url: input.returnUrl || config.returnUrl,
+        },
+        description: input.description.slice(0, 128),
+        metadata: {
+          paymentId: input.paymentId,
+          userId: input.userId,
+          plan: input.plan,
+          externalId: input.externalId,
+        },
+      };
+
+      if (isReceiptEnabled()) {
+        body.receipt = buildYooKassaReceipt(input.customer ?? {}, {
+          description: input.description,
+          amountRub: input.amountKopeks / 100,
+          currency: input.currency,
+        });
+      }
+
       const response = await fetch("https://api.yookassa.ru/v3/payments", {
         method: "POST",
         headers: {
@@ -48,24 +80,7 @@ export function createYooKassaProvider(): PaymentProvider {
           "Content-Type": "application/json",
           "Idempotence-Key": input.externalId,
         },
-        body: JSON.stringify({
-          amount: {
-            value: amountValue,
-            currency: input.currency,
-          },
-          capture: true,
-          confirmation: {
-            type: "redirect",
-            return_url: input.returnUrl || config.returnUrl,
-          },
-          description: input.description.slice(0, 128),
-          metadata: {
-            paymentId: input.paymentId,
-            userId: input.userId,
-            plan: input.plan,
-            externalId: input.externalId,
-          },
-        }),
+        body: JSON.stringify(body),
       });
 
       const payload = (await response.json()) as YooKassaPaymentResponse & {

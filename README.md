@@ -40,6 +40,7 @@
 | **Auth** | Вход через Яндекс и VK ID (+ Dev Login для локалки) |
 | **Кабинет** | Профиль, план Free/Pro, empty/paid состояния |
 | **Оплата** | ЮKassa или Robokassa, создание платежа и webhooks |
+| **Чеки 54-ФЗ** | опционально: `RECEIPT_ENABLED` + СНО/НДС в env |
 | **Подтверждения** | OTP для email и телефона в профиле |
 | **AI** | Чат в кабинете: `AI_PROVIDER` + `AI_API_KEY` |
 | **Письма / SMS** | SMTP или Unisender, SMS.ru или console |
@@ -116,7 +117,7 @@ cp .env.example .env
 
 - база данных: `DATABASE_URL`, `DB_PROVIDER`
 - auth: `AUTH_SECRET`, `AUTH_YANDEX_*` / `AUTH_VK_*`
-- оплата: `PAYMENT_PROVIDER` + ключи ЮKassa (`YOOKASSA_*`) или Robokassa (`ROBOKASSA_*`)
+- оплата: `PAYMENT_PROVIDER` + ключи ЮKassa (`YOOKASSA_*`) или Robokassa (`ROBOKASSA_*`); чеки 54-ФЗ — `RECEIPT_ENABLED`, `RECEIPT_SNO`, `RECEIPT_VAT`
 - нейросеть: `AI_PROVIDER`, `AI_API_KEY` (опционально `AI_MODEL`) — [`docs/setup-ai.md`](docs/setup-ai.md)
 - почта / SMS: `EMAIL_PROVIDER` + SMTP/Unisender, `SMS_PROVIDER` + SMS.ru
 

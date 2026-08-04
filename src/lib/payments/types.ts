@@ -13,6 +13,11 @@ export type CreatePaymentInput = {
   currency: string;
   description: string;
   returnUrl: string;
+  customer?: {
+    email?: string | null;
+    phone?: string | null;
+    fullName?: string | null;
+  };
 };
 
 export type CreatePaymentResult = {

@@ -38,7 +38,22 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ResultURL должен отвечать `OK{InvId}` после успешной обработки (так и сделано в коде).
 
-## 3. Проверка сценария
+## 3. Чеки 54-ФЗ (фискализация)
+
+Для облачной кассы / Робочеков передавай номенклатуру в `Receipt` ([дока](https://docs.robokassa.ru/ru/fiscalization)):
+
+```env
+RECEIPT_ENABLED=true
+RECEIPT_SNO=usn_income
+RECEIPT_VAT=none
+```
+
+`Receipt` входит в подпись: `MerchantLogin:OutSum:InvId:Receipt:Password1` (Receipt URL-encoded).  
+Email покупателя берётся из профиля (`Email` в запросе). Без email/телефона при `RECEIPT_ENABLED=true` оплата не стартует.
+
+Без фискализации в ЛК — `RECEIPT_ENABLED=false`.
+
+## 4. Проверка сценария
 
 1. Живая БД + OAuth-вход (не Dev Login).
 2. Оплата Pro из кабинета / `/pricing`.
@@ -50,3 +65,5 @@ ResultURL должен отвечать `OK{InvId}` после успешной 
 - Перепутаны Password1 и Password2.
 - ResultURL недоступен снаружи → Pro не обновится.
 - Забыли `PAYMENT_PROVIDER=robokassa`.
+- `RECEIPT_ENABLED=true` без email/телефона в профиле → ошибка до редиректа.
+- Фискализация включена в коде, но не в ЛК Robokassa → чек не сформируется / способы оплаты пропадут.

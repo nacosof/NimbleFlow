@@ -3,6 +3,10 @@ import { eq } from "drizzle-orm";
 import { plans, type PlanId } from "@/config/plans";
 import { db, tables } from "@/db/runtime";
 import { getPaymentProvider } from "@/lib/payments/provider";
+import {
+  assertReceiptCustomer,
+  isReceiptEnabled,
+} from "@/lib/payments/receipt";
 import type { PaymentProviderId } from "@/lib/payments/types";
 import { getPaymentSuccessUrl } from "@/lib/payments/urls";
 
@@ -20,6 +24,26 @@ export async function createCheckout(input: {
   const provider = getPaymentProvider();
   const database = db();
   const schema = tables();
+
+  const [user] = await database
+    .select({
+      email: schema.users.email,
+      phone: schema.users.phone,
+      name: schema.users.name,
+    })
+    .from(schema.users)
+    .where(eq(schema.users.id, input.userId))
+    .limit(1);
+
+  const customer = {
+    email: user?.email ?? null,
+    phone: user?.phone ?? null,
+    fullName: user?.name ?? null,
+  };
+
+  if (isReceiptEnabled()) {
+    assertReceiptCustomer(customer);
+  }
 
   const paymentId = crypto.randomUUID();
   const externalId = crypto.randomUUID();
@@ -47,6 +71,7 @@ export async function createCheckout(input: {
       currency: "RUB",
       description: `NimbleFlow ${plan.name}`,
       returnUrl,
+      customer,
     });
 
     const patch: {
