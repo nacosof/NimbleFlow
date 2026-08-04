@@ -47,7 +47,7 @@
 | **Документы** | Шаблоны оферты, политики ПДн, пользовательского соглашения |
 | **SEO** | metadata, `sitemap.xml`, `robots.txt`, Open Graph |
 | **Метрика** | Яндекс Метрика через `NEXT_PUBLIC_YANDEX_METRIKA_ID` |
-| **Docs** | Гайды по OAuth, платежам, Метрике, ngrok и деплою |
+| **Docs** | Гайды по OAuth, платежам, Метрике, ngrok и деплою; [карта модулей](docs/modules.md) |
 
 ---
 
@@ -81,8 +81,8 @@ src/
     └── seo/
 ```
 
-Подробности модулей — в [`docs/`](docs/README.md).
-Конфиг и секреты — через `.env` (см. [`.env.example`](.env.example)). 
+Подробности модулей — в [`docs/modules.md`](docs/modules.md). Гайды setup — [`docs/`](docs/README.md).
+Конфиг и секреты — через `.env` (см. [`.env.example`](.env.example)).
 
 ---
 
