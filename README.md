@@ -174,11 +174,9 @@ Dev Login закрывает только UI без БД — оплата и OTP
 
 ## Поддержать автора
 
-Если шаблон сэкономил время — можно кинуть кофе:
-
 | Способ | Реквизиты |
 |--------|-----------|
-| USDT (TRC20) | `TJ5xVZ74QUvUvLY7QdNR97Bk4zJn2mnniZ` |
+| TRC20 | `TJ5xVZ74QUvUvLY7QdNR97Bk4zJn2mnniZ` |
 | Т‑Банк | [Сбор](https://www.tbank.ru/cf/7izwYVvsLtw) |
 
 Спасибо.
