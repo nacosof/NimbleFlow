@@ -14,7 +14,7 @@
 
 ---
 
-<img src="public/readme/ai-equation.png" alt="NimbleFlow плюс Cursor, Claude, ChatGPT, Gemini, Grok, DeepSeek равно Запусти свой проект мгновенно" width="720" />
+<img src="public/readme/equation-banner.png" alt="NimbleFlow плюс AI и инструменты равно Запустите свой проект мгновенно" width="720" />
 
 Отдай этот репозиторий **ИИ**, опиши свой продукт — и допиливай каркас под себя или выдергивай то, что надо тебе, а не собирай auth, оплату, кабинет, интеграцию AI и документы с нуля!
 
